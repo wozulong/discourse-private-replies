@@ -177,8 +177,14 @@ after_initialize do
 
           protected_topic_list = TopicCustomField.where(:name => 'private_replies').where(:value => true).pluck(:topic_id).join(',')
 
-          if !protected_topic_list.empty?
-            builder.where("( (a.target_topic_id not in (#{protected_topic_list})) OR (a.acting_user_id = t.user_id) OR (a.acting_user_id in (#{userid_list})) )")
+          unless protected_topic_list.empty?
+            sql_fragment = builder.to_sql
+
+            if sql_fragment.include?('discourse_reactions_reaction_users')
+              builder.where("( (t.id not in (#{protected_topic_list})) OR (discourse_reactions_reaction_users.user_id = t.user_id) OR (discourse_reactions_reaction_users.user_id in (#{userid_list})) )")
+            else
+              builder.where("( (a.target_topic_id not in (#{protected_topic_list})) OR (a.acting_user_id = t.user_id) OR (a.acting_user_id in (#{userid_list})) )")
+            end
           end
         end
         super(builder, user_id, guardian, ignore_private_messages)
