@@ -22,8 +22,9 @@ By pressing this button you have enabled the Private Replies feature for this to
 
 A banner will appear above the topic and the following happens:
 
-- people will only be able to see posts made by themself, by the topic owner, and by staff.
-- only the topic owner will be able to see all posts.
+- people will only be able to see posts made by themself, by the topic owner, and by users in specific groups.
+- only the topic owner, staff members and users in `private_replies_groups_can_see_all` will be able to see all posts. If `private_replies_topic_starter_primary_group_can_see_all`
+and/or `private_replies_participants_can_see_all` are enabled then those can see the posts as well.
 
 ![banner](https://raw.githubusercontent.com/discoursehosting/discourse-private-replies/master/screenshots/banner.png)
 
@@ -31,7 +32,7 @@ By pressing the button a second time, the topic will revert back to normal.
 
 ## Use cases
 
-This can be used for for instance homework assignments where the teacher opens a topic and posts an assignment, 
+This can be used for for instance homework assignments where the teacher opens a topic and posts an assignment,
 and all students make a post with their answers. When everyone has submitted their work, the teacher can open up
 the answers so the students will be able to discuss them.
 
@@ -40,7 +41,7 @@ sale is done, the topic owner can reveal all bids in order to show the community
 
 ## Restrictions
 
-The topic list icons will still show who has posted in the topic. 
+The topic list icons will still show who has posted in the topic.
 You will also be able to see 'user xxx is replying' at the bottom of the topic.
 
 
